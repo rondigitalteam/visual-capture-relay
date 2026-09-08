@@ -191,12 +191,6 @@
 }
 
 @utility page-grid {
-  width: min(100% - 3rem, 72rem);
+  width: min(100% - 2rem, 72rem);
   margin-inline: auto;
-}
-
-@media (max-width: 640px) {
-  @utility page-grid {
-    width: min(100% - 2rem, 72rem);
-  }
 }
