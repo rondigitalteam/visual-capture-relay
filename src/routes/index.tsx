@@ -5,6 +5,7 @@ import { useState, type FormEvent } from "react";
 import mayaPortrait from "@/assets/ron-client-maya.jpg";
 import davidPortrait from "@/assets/ron-client-david.jpg";
 import sofiaPortrait from "@/assets/ron-client-sofia.jpg";
+import ronDigitalLogo from "@/assets/ron-digital-logo-cropped.png";
 
 const services = [
   ["01", "Web Design & Build", "Conversion-first sites engineered to load fast and look premium on every device."],
@@ -49,8 +50,7 @@ function Index() {
     <div className="app-surface min-h-screen overflow-hidden text-ink antialiased">
       <header className="relative z-20 page-grid flex items-center justify-between py-5">
         <a href="#top" className="flex items-center gap-2.5" aria-label="Ron Digital home">
-          <span className="brand-gradient display-font grid size-9 place-items-center rounded-xl text-sm font-extrabold text-brand-foreground brand-shadow">R</span>
-          <span className="display-font text-lg font-extrabold tracking-tight">Ron Digital</span>
+          <img src={ronDigitalLogo} alt="Ron Digital" width={148} height={89} className="h-11 w-auto object-contain sm:h-12" />
         </a>
         <nav className="hidden items-center gap-8 text-sm text-ink-muted md:flex" aria-label="Main navigation">
           <a href="#services" className="transition-colors hover:text-brand">Services</a>
@@ -132,7 +132,7 @@ function Index() {
         <section className="page-grid py-16"><div className="relative overflow-hidden rounded-3xl bg-ink p-8 text-center text-background sm:p-12"><div className="pointer-events-none absolute -right-16 -top-24 size-72 rounded-full bg-brand-glow/20 blur-3xl" /><h2 className="display-font relative text-3xl font-extrabold tracking-tight sm:text-5xl">Ready to grow with Ron Digital?</h2><p className="relative mx-auto mt-4 max-w-xl leading-relaxed text-background/70">Book a free 30-minute strategy call and leave with a clear action plan — whether you hire us or not.</p><a href="#contact" className="relative mt-8 inline-flex items-center gap-2 rounded-full bg-background px-8 py-3.5 font-bold text-brand transition-transform hover:-translate-y-0.5">Book your free call <ArrowUpRight className="size-4" /></a></div></section>
       </main>
 
-      <footer className="page-grid flex flex-col items-center justify-between gap-4 py-10 text-sm text-ink-muted md:flex-row"><div className="flex items-center gap-2"><span className="brand-gradient display-font grid size-7 place-items-center rounded-lg text-xs font-extrabold text-brand-foreground">R</span><span className="display-font font-extrabold text-ink">Ron Digital</span></div><p>© 2026 Ron Digital. All rights reserved.</p><div className="flex gap-5"><a href="#services" className="hover:text-brand">Services</a><a href="#faq" className="hover:text-brand">FAQ</a><a href="#contact" className="hover:text-brand">Contact</a><a href="#contact" aria-label="Contact Ron Digital on LinkedIn" className="hover:text-brand"><Linkedin className="size-4" /></a></div></footer>
+      <footer className="page-grid flex flex-col items-center justify-between gap-4 py-10 text-sm text-ink-muted md:flex-row"><div><img src={ronDigitalLogo} alt="Ron Digital" width={118} height={71} className="h-9 w-auto object-contain" /></div><p>© 2026 Ron Digital. All rights reserved.</p><div className="flex gap-5"><a href="#services" className="hover:text-brand">Services</a><a href="#faq" className="hover:text-brand">FAQ</a><a href="#contact" className="hover:text-brand">Contact</a><a href="#contact" aria-label="Contact Ron Digital on LinkedIn" className="hover:text-brand"><Linkedin className="size-4" /></a></div></footer>
     </div>
   );
 }
