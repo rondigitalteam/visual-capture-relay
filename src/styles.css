@@ -68,6 +68,7 @@
   --color-glass: var(--glass);
   --color-glass-border: var(--glass-border);
   --color-sky-wash: var(--sky-wash);
+  --color-navy-muted: var(--navy-muted);
   --font-display: "Sora", sans-serif;
   --font-body: "Inter", sans-serif;
 }
@@ -115,6 +116,7 @@
   --glass: oklch(1 0 0 / 0.68);
   --glass-border: oklch(1 0 0 / 0.78);
   --sky-wash: oklch(0.94 0.04 228);
+  --navy-muted: oklch(0.76 0.03 250);
   --gradient-brand: linear-gradient(135deg, var(--brand), var(--brand-glow));
   --shadow-glass: 0 22px 60px -34px oklch(0.22 0.12 258 / 0.32);
 }
@@ -168,7 +170,39 @@
 }
 
 @utility app-surface {
-  background: linear-gradient(135deg, oklch(0.95 0.035 236), oklch(1 0 0), oklch(0.94 0.045 224));
+  background: var(--background);
+}
+
+@utility navy-surface {
+  background: var(--ink);
+}
+
+@utility section-wash {
+  background: var(--sky-wash);
+}
+
+@utility hero-grid {
+  background-image: linear-gradient(to right, oklch(1 0 0 / 0.06) 1px, transparent 1px), linear-gradient(to bottom, oklch(1 0 0 / 0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, black, transparent 80%);
+}
+
+@utility eyebrow {
+  display: inline-block;
+  color: var(--brand);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+@utility mockup-light {
+  background: linear-gradient(135deg, var(--sky-wash), var(--brand-soft));
+}
+
+@utility mockup-navy {
+  background: linear-gradient(135deg, var(--ink), var(--brand));
 }
 
 @utility glass-panel {

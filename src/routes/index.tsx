@@ -1,35 +1,106 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, Check, ChevronDown, Linkedin, Mail, Menu, Sparkles } from "lucide-react";
+import {
+  ArrowUpRight,
+  BarChart3,
+  BriefcaseBusiness,
+  Check,
+  ChevronDown,
+  ClipboardList,
+  Code2,
+  Compass,
+  Globe2,
+  Layers3,
+  Linkedin,
+  Mail,
+  Menu,
+  Palette,
+  Search,
+  Send,
+  SlidersHorizontal,
+  Sparkles,
+  Target,
+  Workflow,
+  X,
+  type LucideIcon,
+} from "lucide-react";
 import { useState, type FormEvent } from "react";
 
-import mayaPortrait from "@/assets/ron-client-maya.jpg";
 import davidPortrait from "@/assets/ron-client-david.jpg";
-import sofiaPortrait from "@/assets/ron-client-sofia.jpg";
+import mayaPortrait from "@/assets/ron-client-maya.jpg";
 import ronDigitalLogo from "@/assets/ron-digital-logo-cropped.png";
+import sofiaPortrait from "@/assets/ron-client-sofia.jpg";
 
-const services = [
-  ["01", "Web Design & Build", "Conversion-first sites engineered to load fast and look premium on every device."],
-  ["02", "SEO & Content", "Rank for the searches that matter with technical SEO and content that converts."],
-  ["03", "Paid Media", "Full-funnel Google and Meta campaigns tuned daily for maximum ROI."],
-  ["04", "Brand & Identity", "Logos, systems and voice that make you unignorable in a crowded market."],
-  ["05", "Email & CRM", "Automated flows that nurture leads and revive revenue from your list."],
-  ["06", "Analytics & CRO", "Data-backed testing that keeps improving your site month after month."],
+type Filter = "All" | "Websites" | "Branding" | "Marketing" | "E-commerce";
+
+const navigation = [
+  ["Home", "#top"],
+  ["Services", "#services"],
+  ["Portfolio", "#portfolio"],
+  ["About", "#about"],
+  ["Testimonials", "#testimonials"],
+  ["FAQ", "#faq"],
+  ["Contact", "#contact"],
+] as const;
+
+const services: { number: string; title: string; description: string; icon: LucideIcon }[] = [
+  { number: "01", title: "SEO", description: "Help your business become easier to find when potential customers search online.", icon: Search },
+  { number: "02", title: "Website Design", description: "Create a professional, user-friendly website that makes it easy for visitors to take action.", icon: Globe2 },
+  { number: "03", title: "Email Marketing & Automation", description: "Keep customers engaged with thoughtful emails and automated follow-ups that turn interest into action.", icon: Send },
+  { number: "04", title: "Traffic Optimization", description: "Attract more of the people who are most likely to become customers through smarter traffic decisions.", icon: BarChart3 },
+  { number: "05", title: "Conversion Optimization", description: "Improve the website experience so more visitors buy, book, sign up, or get in touch.", icon: Target },
+  { number: "06", title: "Branding & Customization", description: "Build a consistent, professional look that makes your business easier to recognize and remember.", icon: Palette },
+  { number: "07", title: "Consultation", description: "Get practical guidance on your website, customer journey, marketing, or online growth strategy.", icon: Compass },
+];
+
+const features = [
+  ["Business-Focused", "We focus on solutions that support your actual business goals."],
+  ["Customized Approach", "Your business is different, so your digital strategy should not be one-size-fits-all."],
+  ["User-Friendly", "We create experiences that are simple for your customers to understand and use."],
+  ["Results-Oriented", "Every solution is designed with visibility, engagement, and conversions in mind."],
+] as const;
+
+const portfolioProjects = [
+  { name: "Northstar Commerce", category: "Websites" as Filter, type: "Website concept", description: "A clearer product journey for a growing online retailer." },
+  { name: "Signal Studio", category: "Branding" as Filter, type: "Brand system concept", description: "A focused visual system for a modern service business." },
+  { name: "Nurture Flow", category: "Marketing" as Filter, type: "Email system concept", description: "A welcome journey designed to turn interest into action." },
+  { name: "Atlas Checkout", category: "E-commerce" as Filter, type: "Conversion concept", description: "A simpler path from product discovery to purchase." },
+];
+
+const processSteps = [
+  ["01", "Consultation", "We learn about your business, goals, and current challenges.", ClipboardList],
+  ["02", "Strategy", "We identify the right solution and create a clear plan.", Compass],
+  ["03", "Build", "We develop and implement the agreed solution.", Code2],
+  ["04", "Optimize", "We review the results and identify opportunities for improvement.", Workflow],
+] as const;
+
+const testimonials = [
+  [mayaPortrait, "Example placeholder", "Business owner", "Ron Digital helped us create a much clearer online presence and gave us better direction for reaching our customers."],
+  [davidPortrait, "Example placeholder", "Marketing lead", "The process felt practical from the first conversation, with clear next steps instead of unnecessary complexity."],
+  [sofiaPortrait, "Example placeholder", "Founder", "A thoughtful digital partner for businesses that want to build, connect, and grow with confidence."],
 ] as const;
 
 const faqs = [
-  ["How long does a website project take?", "Most sites launch in 4–8 weeks depending on scope. We agree a fixed timeline before we start."],
-  ["Do you work with small businesses?", "Absolutely. We have packages for growing teams as well as established companies scaling fast."],
-  ["What does ongoing support cost?", "Retainers start at a fixed monthly rate with no lock-in. You can pause or upgrade anytime."],
-  ["Can your services be customized?", "Yes. Every engagement is shaped around your audience, goals, timeline, and the systems you already use."],
+  ["What services does Ron Digital offer?", "We offer SEO, website design, email marketing and automation, traffic optimization, conversion optimization, branding, and consultation."],
+  ["How can Ron Digital help my business?", "We connect the right digital improvements to your business goals, helping you become easier to find, easier to trust, and easier to choose."],
+  ["Do you design websites from scratch?", "Yes. We can shape a new website from strategy through launch, including its structure, content direction, design, and conversion path."],
+  ["Can you improve my existing website?", "Yes. We can review what is working, identify friction, and recommend focused improvements rather than starting over unnecessarily."],
+  ["Do you provide email marketing and automation?", "Yes. We can help plan email journeys, write useful follow-ups, and organize automations around your customer journey."],
+  ["Can you help improve my website conversions?", "Yes. We look at the experience, messaging, calls to action, and key paths so more of the right visitors take the next step."],
+  ["Can your services be customized?", "Absolutely. Every recommendation is shaped around your audience, goals, timeline, and current systems."],
+  ["How much does a project cost?", "Projects start from $500. The final price depends on the scope, requirements, and level of support your project needs."],
+  ["What is the minimum project budget?", "Our projects start from $500. A consultation helps us match the right starting point to your priorities."],
+  ["How do I get started?", "Send a project request or email rondigital.team@gmail.com. We will review your goals and suggest a practical next step."],
 ] as const;
+
+const budgetOptions = ["$500 – $1,000", "$1,000 – $2,500", "$2,500 – $5,000", "$5,000+"] as const;
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Ron Digital | Digital Growth Studio" },
-      { name: "description", content: "Grow your brand with conversion-focused websites, SEO, campaigns, and digital systems from Ron Digital." },
-      { property: "og:title", content: "Ron Digital | Digital Growth Studio" },
-      { property: "og:description", content: "Digital marketing and website solutions that help ambitious businesses attract, engage, and convert more customers." },
+      { title: "Ron Digital | Digital Solutions That Help Businesses Grow" },
+      { name: "description", content: "Ron Digital creates practical websites, search, email, branding, and conversion solutions for businesses ready to build, connect, and grow." },
+      { property: "og:title", content: "Ron Digital | Digital Solutions That Help Businesses Grow" },
+      { property: "og:description", content: "Practical digital solutions for businesses ready to build a stronger online presence and connect with the right customers." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -40,103 +111,117 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [submitted, setSubmitted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeFilter, setActiveFilter] = useState<Filter>("All");
+  const [budget, setBudget] = useState<(typeof budgetOptions)[number]>(budgetOptions[0]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSubmitted(true);
   }
 
+  const visibleProjects = activeFilter === "All" ? portfolioProjects : portfolioProjects.filter((project) => project.category === activeFilter);
+
   return (
     <div className="app-surface min-h-screen overflow-hidden text-ink antialiased">
-      <header className="relative z-20 page-grid flex items-center justify-between py-5">
-        <a href="#top" className="flex items-center gap-2.5" aria-label="Ron Digital home">
-          <img src={ronDigitalLogo} alt="Ron Digital" width={148} height={89} className="h-11 w-auto object-contain sm:h-12" />
-        </a>
-        <nav className="hidden items-center gap-8 text-sm text-ink-muted md:flex" aria-label="Main navigation">
-          <a href="#services" className="transition-colors hover:text-brand">Services</a>
-          <a href="#why" className="transition-colors hover:text-brand">Why us</a>
-          <a href="#faq" className="transition-colors hover:text-brand">FAQ</a>
-          <a href="#contact" className="transition-colors hover:text-brand">Contact</a>
-        </nav>
-        <div className="flex items-center gap-2">
-          <a href="#contact" className="brand-gradient rounded-full px-5 py-2.5 text-sm font-semibold text-brand-foreground brand-shadow transition-transform hover:-translate-y-0.5">Book a call</a>
-          <button type="button" className="glass-panel grid size-10 place-items-center rounded-full text-brand md:hidden" aria-label="Toggle navigation" aria-expanded={mobileOpen} onClick={() => setMobileOpen((open) => !open)}>
-            <Menu className="size-5" />
-          </button>
-        </div>
-        {mobileOpen && (
-          <nav className="glass-panel absolute inset-x-0 top-full mt-2 grid gap-1 rounded-2xl p-3 text-sm text-ink-muted md:hidden" aria-label="Mobile navigation">
-            {[["Services", "#services"], ["Why us", "#why"], ["FAQ", "#faq"], ["Contact", "#contact"]].map(([label, href]) => (
-              <a key={href} href={href} className="rounded-xl px-4 py-3 transition-colors hover:bg-brand-soft hover:text-brand" onClick={() => setMobileOpen(false)}>{label}</a>
-            ))}
+      <header className="sticky top-0 z-30 border-b border-border/70 bg-background/90 backdrop-blur-md">
+        <div className="page-grid flex min-h-20 items-center justify-between gap-5">
+          <a href="#top" aria-label="Ron Digital home" className="shrink-0">
+            <img src={ronDigitalLogo} alt="Ron Digital" width={148} height={89} className="h-11 w-auto object-contain sm:h-12" />
+          </a>
+          <nav className="hidden items-center gap-5 text-sm text-ink-muted xl:flex" aria-label="Main navigation">
+            {navigation.map(([label, href]) => <a key={href} href={href} className="transition-colors hover:text-brand">{label}</a>)}
           </nav>
-        )}
+          <div className="flex items-center gap-2">
+            <a href="#contact" className="hidden rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-background transition-colors hover:bg-brand sm:inline-flex">Book a Consultation</a>
+            <button type="button" className="grid size-10 place-items-center rounded-lg border border-border bg-background text-brand xl:hidden" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} aria-expanded={mobileOpen} onClick={() => setMobileOpen((open) => !open)}>
+              {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+          </div>
+          {mobileOpen && <nav className="absolute inset-x-4 top-[calc(100%-0.25rem)] grid gap-1 rounded-xl border border-border bg-background p-3 shadow-lg xl:hidden" aria-label="Mobile navigation">
+            {navigation.map(([label, href]) => <a key={href} href={href} className="rounded-lg px-4 py-3 text-sm text-ink-muted hover:bg-brand-soft hover:text-brand" onClick={() => setMobileOpen(false)}>{label}</a>)}
+            <a href="#contact" className="mt-1 rounded-lg bg-ink px-4 py-3 text-center text-sm font-semibold text-background" onClick={() => setMobileOpen(false)}>Book a Consultation</a>
+          </nav>}
+        </div>
       </header>
 
       <main id="top">
-        <section className="page-grid grid gap-6 pb-16 pt-10 lg:grid-cols-12 lg:pt-16">
-          <div className="glass-panel flex flex-col justify-center rounded-3xl p-7 sm:p-10 lg:col-span-7">
-            <span className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-brand">Digital marketing, done right</span>
-            <h1 className="display-font max-w-[12ch] text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">Grow your brand with a website that actually converts</h1>
-            <p className="mt-5 max-w-lg text-lg leading-relaxed text-ink-muted">From strategy to launch, Ron Digital builds fast, beautiful sites and campaigns that turn visitors into customers.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#contact" className="brand-gradient inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold text-brand-foreground brand-shadow transition-transform hover:-translate-y-0.5">Get a free proposal <ArrowUpRight className="size-4" /></a>
-              <a href="#services" className="glass-panel inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold text-ink-muted transition-colors hover:text-brand">Explore services</a>
+        <section className="navy-surface relative overflow-hidden text-background">
+          <div className="hero-grid pointer-events-none absolute inset-0 opacity-40" />
+          <div className="page-grid relative grid gap-12 py-20 md:py-28 lg:grid-cols-12 lg:items-center lg:py-32">
+            <div className="max-w-3xl lg:col-span-8">
+              <span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-glow"><span className="size-2 rounded-full bg-brand-glow" />Practical digital solutions</span>
+              <h1 className="display-font max-w-4xl text-5xl font-extrabold leading-[1.03] tracking-tight sm:text-6xl lg:text-7xl">Creating Digital Solutions That Help Businesses <span className="text-brand-glow">Grow.</span></h1>
+              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-navy-muted sm:text-xl">From websites and branding to search visibility, email systems, traffic, and conversions, Ron Digital helps businesses create a stronger digital presence and connect with the right customers.</p>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <a href="#contact" className="inline-flex items-center gap-2 rounded-lg bg-brand px-6 py-3.5 font-semibold text-brand-foreground transition-colors hover:bg-brand-glow">Book a Consultation <ArrowUpRight className="size-4" /></a>
+                <a href="#services" className="inline-flex items-center gap-2 rounded-lg border border-background/20 px-6 py-3.5 font-semibold text-background transition-colors hover:border-brand-glow hover:text-brand-glow">Explore Our Services</a>
+              </div>
+              <p className="mt-10 flex items-center gap-3 text-sm text-navy-muted"><Check className="size-4 text-brand-glow" />Practical digital solutions built around your business goals.</p>
             </div>
-            <div className="mt-9 flex flex-wrap gap-x-8 gap-y-4 border-t border-glass-border pt-6">
-              <div><p className="display-font text-2xl font-extrabold text-brand">240%</p><p className="text-xs text-ink-muted">Average lead lift</p></div>
-              <div><p className="display-font text-2xl font-extrabold">120+</p><p className="text-xs text-ink-muted">Brands scaled</p></div>
-              <div><p className="display-font text-2xl font-extrabold">98%</p><p className="text-xs text-ink-muted">Client retention</p></div>
+            <div className="relative hidden min-h-80 lg:col-span-4 lg:block">
+              <div className="absolute inset-5 rounded-[2rem] border border-background/15 bg-background/[0.04]" />
+              <div className="absolute right-2 top-8 w-56 rounded-xl border border-background/15 bg-background/[0.08] p-5 backdrop-blur-sm">
+                <div className="flex items-center justify-between text-xs text-navy-muted"><span>Growth system</span><Sparkles className="size-4 text-brand-glow" /></div>
+                <div className="mt-8 flex items-end gap-2"><span className="display-font text-4xl font-bold text-background">01</span><span className="mb-1 text-sm text-navy-muted">clear next step</span></div>
+                <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-background/10"><div className="h-full w-3/4 rounded-full bg-brand-glow" /></div>
+              </div>
+              <div className="absolute bottom-8 left-0 w-60 rounded-xl bg-background p-5 text-ink shadow-2xl">
+                <div className="flex items-center gap-3"><div className="grid size-10 place-items-center rounded-lg bg-brand-soft text-brand"><Target className="size-5" /></div><div><p className="text-xs text-ink-muted">Focus</p><p className="font-semibold">Attract · Engage · Convert</p></div></div>
+                <div className="mt-6 grid grid-cols-3 gap-2"><span className="h-12 rounded-md bg-brand-soft" /><span className="mt-3 h-9 rounded-md bg-sky-wash" /><span className="mt-1 h-11 rounded-md bg-brand-soft" /></div>
+              </div>
             </div>
           </div>
-          <div className="grid gap-6 lg:col-span-5 lg:grid-rows-2">
-            <div className="brand-gradient flex min-h-56 flex-col justify-end rounded-3xl p-7 text-brand-foreground brand-shadow">
-              <Sparkles className="mb-auto size-7" />
-              <p className="display-font text-4xl font-extrabold">240%</p>
-              <p className="text-sm opacity-80">Average lift in qualified leads</p>
-            </div>
-            <div className="glass-panel flex min-h-44 flex-col justify-between rounded-3xl p-7">
-              <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.16em] text-brand"><span>Ron / signal</span><span className="size-2 rounded-full bg-brand-glow" /></div>
-              <div><p className="display-font text-3xl font-extrabold">120+</p><p className="text-sm text-ink-muted">Brands scaled across 9 industries</p></div>
+        </section>
+
+        <section id="services" className="section-wash py-20 md:py-24">
+          <div className="page-grid">
+            <div className="mb-12 max-w-2xl"><span className="eyebrow">What we can help you with</span><h2 className="display-font mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Simple, practical digital solutions</h2><p className="mt-4 leading-relaxed text-ink-muted">Designed to help your business attract, engage, and convert without adding unnecessary complexity.</p></div>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {services.map(({ number, title, description, icon: Icon }, index) => <a key={title} href="#contact" className={`${index === 6 ? "navy-surface text-background" : "bg-background"} group rounded-xl border border-border p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-brand/50 hover:shadow-lg ${index === 1 ? "lg:col-span-2" : ""}`}>
+                <div className={`${index === 6 ? "bg-background/10 text-brand-glow" : "bg-brand-soft text-brand"} grid size-11 place-items-center rounded-lg`}><Icon className="size-5" /></div>
+                <span className={`${index === 6 ? "text-navy-muted" : "text-ink-muted"} mt-6 block text-xs font-semibold tracking-[0.16em]`}>{number}</span>
+                <h3 className="display-font mt-2 text-lg font-bold">{title}</h3>
+                <p className={`${index === 6 ? "text-navy-muted" : "text-ink-muted"} mt-3 text-sm leading-relaxed`}>{description}</p>
+                <span className={`${index === 6 ? "text-brand-glow" : "text-brand"} mt-5 inline-flex items-center gap-1 text-sm font-semibold`}>Learn more <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></span>
+              </a>)}
             </div>
           </div>
         </section>
 
-        <section id="services" className="page-grid py-16">
-          <div className="mb-8"><span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">What we do</span><h2 className="display-font mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">Six ways we move the needle</h2></div>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {services.map(([number, title, description], index) => (
-              <a key={title} href="#contact" className={`${index === 5 ? "brand-gradient text-brand-foreground brand-shadow" : "glass-panel"} group rounded-3xl p-7 transition-transform hover:-translate-y-1`}>
-                <div className={`${index === 5 ? "bg-brand-foreground/20 text-brand-foreground" : "bg-brand-soft text-brand"} display-font grid size-11 place-items-center rounded-xl text-lg font-extrabold`}>{number}</div>
-                <h3 className="display-font mt-4 text-lg font-extrabold">{title}</h3>
-                <p className={`${index === 5 ? "opacity-85" : "text-ink-muted"} mt-2 text-sm leading-relaxed`}>{description}</p>
-                <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold opacity-0 transition-opacity group-hover:opacity-100">Learn more <ArrowUpRight className="size-4" /></span>
-              </a>
-            ))}
+        <section id="about" className="page-grid grid gap-10 py-20 md:py-24 lg:grid-cols-2 lg:items-center">
+          <div><span className="eyebrow">Why Ron Digital</span><h2 className="display-font mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Digital Solutions Built Around Your Business</h2><p className="mt-5 max-w-xl leading-relaxed text-ink-muted">Ron Digital provides practical digital solutions for businesses looking to build a stronger online presence. We combine strategy, design, visibility, customer journeys, and personalized consultation to help businesses connect with their audience.</p><a href="#contact" className="mt-7 inline-flex items-center gap-2 font-semibold text-brand hover:underline">Work With Ron Digital <ArrowUpRight className="size-4" /></a></div>
+          <div className="grid gap-3 sm:grid-cols-2">{features.map(([title, description], index) => <div key={title} className="rounded-xl border border-border bg-background p-6 shadow-sm"><div className="flex items-center justify-between"><span className="grid size-9 place-items-center rounded-lg bg-brand-soft text-brand"><Check className="size-4" /></span><span className="text-xs font-semibold text-ink-muted">0{index + 1}</span></div><h3 className="display-font mt-5 font-bold">{title}</h3><p className="mt-2 text-sm leading-relaxed text-ink-muted">{description}</p></div>)}</div>
+        </section>
+
+        <section id="portfolio" className="section-wash py-20 md:py-24">
+          <div className="page-grid"><div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><span className="eyebrow">Selected concepts</span><h2 className="display-font mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Our Recent Work</h2><p className="mt-4 max-w-xl leading-relaxed text-ink-muted">Explore sample digital experiences and brand systems. These concept examples are placeholders for future client work.</p></div><div className="flex flex-wrap gap-2" role="group" aria-label="Filter project concepts">{(["All", "Websites", "Branding", "Marketing", "E-commerce"] as Filter[]).map((filter) => <button key={filter} type="button" onClick={() => setActiveFilter(filter)} className={`${activeFilter === filter ? "bg-ink text-background" : "border border-border bg-background text-ink-muted hover:border-brand hover:text-brand"} rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors`}>{filter}</button>)}</div></div>
+            <div className="mt-10 grid gap-6 md:grid-cols-2">{visibleProjects.map((project, index) => <article key={project.name} className="group"><div className={`${index % 2 === 0 ? "mockup-light" : "mockup-navy"} relative aspect-[1.45] overflow-hidden rounded-xl border border-border p-5 shadow-sm`}><div className="relative h-full overflow-hidden rounded-lg border border-border/60 bg-background/70"><div className="flex h-8 items-center gap-1 border-b border-border/70 px-3"><span className="size-2 rounded-full bg-brand/40" /><span className="size-2 rounded-full bg-brand-glow/60" /><span className="size-2 rounded-full bg-ink/20" /></div><div className="grid h-[calc(100%-2rem)] grid-cols-[0.8fr_1.2fr] gap-4 p-5"><div><div className="h-3 w-16 rounded bg-brand/60" /><div className="mt-5 h-3 w-full rounded bg-ink/10" /><div className="mt-2 h-3 w-5/6 rounded bg-ink/10" /><div className="mt-6 h-9 w-24 rounded-md bg-brand" /></div><div className="flex items-end gap-2"><div className="h-2/5 flex-1 rounded-t-md bg-brand-soft" /><div className="h-3/5 flex-1 rounded-t-md bg-brand/50" /><div className="h-4/5 flex-1 rounded-t-md bg-brand" /><div className="h-full flex-1 rounded-t-md bg-brand-glow/70" /></div></div></div></div><div className="mt-5 flex items-start justify-between gap-4"><div><span className="text-xs font-semibold uppercase tracking-[0.15em] text-brand">{project.type}</span><h3 className="display-font mt-2 text-xl font-bold transition-colors group-hover:text-brand">{project.name}</h3><p className="mt-2 text-sm text-ink-muted">{project.description}</p></div><a href="#contact" aria-label={`Discuss ${project.name}`} className="grid size-10 shrink-0 place-items-center rounded-lg border border-border text-brand transition-colors hover:bg-brand hover:text-brand-foreground"><ArrowUpRight className="size-4" /></a></div></article>)}</div>
+            <div className="mt-12 flex flex-col items-center justify-between gap-4 rounded-xl border border-border bg-background p-6 text-center sm:flex-row sm:text-left"><div><h3 className="display-font text-lg font-bold">Have a project in mind?</h3><p className="mt-1 text-sm text-ink-muted">Let’s turn the next idea into something useful.</p></div><a href="#contact" className="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-background hover:bg-brand">Let's Discuss Your Project <ArrowUpRight className="size-4" /></a></div>
           </div>
         </section>
 
-        <section id="why" className="page-grid py-16">
-          <div className="grid gap-6 lg:grid-cols-2">
-            <div className="glass-panel rounded-3xl p-7 sm:p-10"><span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">About us</span><h2 className="display-font mt-2 text-3xl font-extrabold tracking-tight">A senior team, no fluff</h2><p className="mt-4 leading-relaxed text-ink-muted">We’re a lean studio of strategists, designers and engineers. No account-manager handoffs, no bloated retainers — just the people building your growth.</p><div className="mt-6 grid grid-cols-2 gap-4"><div className="rounded-2xl bg-brand-soft p-4"><p className="display-font text-2xl font-extrabold text-brand">8yr</p><p className="text-xs text-ink-muted">avg. client partnership</p></div><div className="rounded-2xl bg-brand-soft p-4"><p className="display-font text-2xl font-extrabold text-brand">98%</p><p className="text-xs text-ink-muted">retention rate</p></div></div></div>
-            <div className="glass-panel rounded-3xl p-7 sm:p-10"><span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">Why choose us</span><h2 className="display-font mt-2 text-3xl font-extrabold tracking-tight">Built for outcomes</h2><ul className="mt-5 space-y-4">{["Transparent pricing with a clear scope from day one.", "A dedicated strategist who knows your business.", "Monthly reports you’ll actually understand and act on.", "Practical systems that keep working after launch."].map((item) => <li key={item} className="flex gap-3 text-sm leading-relaxed text-ink-muted"><span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-brand-soft text-brand"><Check className="size-3.5" /></span><span>{item}</span></li>)}</ul><a href="#contact" className="mt-7 inline-flex items-center gap-2 font-semibold text-brand hover:underline">Work with us <ArrowUpRight className="size-4" /></a></div>
-          </div>
-        </section>
+        <section id="process" className="navy-surface py-20 text-background md:py-24"><div className="page-grid"><div className="mx-auto max-w-2xl text-center"><span className="eyebrow text-brand-glow">How it works</span><h2 className="display-font mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">A clear path from idea to improvement</h2></div><div className="relative mt-14 grid gap-10 md:grid-cols-4 md:gap-6">{processSteps.map(([number, title, description, Icon], index) => <div key={number} className="relative"><div className="mb-5 flex items-center gap-4"><span className={`${index === 0 ? "bg-brand text-brand-foreground" : "border border-background/20 bg-background/10 text-brand-glow"} grid size-12 place-items-center rounded-full font-bold`}>{number}</span>{index < processSteps.length - 1 && <span className="hidden h-px flex-1 bg-background/15 md:block" />}</div><Icon className="size-5 text-brand-glow" /><h3 className="display-font mt-4 text-xl font-bold">{title}</h3><p className="mt-2 text-sm leading-relaxed text-navy-muted">{description}</p></div>)}</div></div></section>
 
-        <section className="page-grid py-16"><span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">Client results</span><h2 className="display-font mb-8 mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">Trusted by ambitious teams</h2><div className="grid gap-5 md:grid-cols-3">{[[mayaPortrait, "Maya Chen", "CMO, Northwind Co", "Ron Digital rebuilt our site in six weeks and our demo bookings doubled within a month."], [davidPortrait, "David Okafor", "Founder, Vantage Labs", "The paid media team paid for itself in the first quarter. Reporting is crystal clear."], [sofiaPortrait, "Sofia Reyes", "VP Growth, Bloomly", "Finally an agency that feels like a partner, not a vendor. Our revenue is up 60%."]].map(([image, name, role, quote], index) => <figure key={name} className={`${index === 2 ? "brand-gradient text-brand-foreground brand-shadow" : "glass-panel"} rounded-3xl p-7`}><div className="flex text-brand-glow" aria-label="5 out of 5 stars">★★★★★</div><blockquote className="mt-4 leading-relaxed opacity-90">“{quote}”</blockquote><figcaption className="mt-5 flex items-center gap-3"><img src={image} alt={`${name}, ${role}`} width={816} height={816} loading="lazy" className="size-11 rounded-full object-cover" /><div><p className="display-font text-sm font-extrabold">{name}</p><p className="text-xs opacity-70">{role}</p></div></figcaption></figure>)}</div></section>
+        <section id="testimonials" className="page-grid py-20 md:py-24"><div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><span className="eyebrow">Client perspective</span><h2 className="display-font mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">What Our Clients Say</h2></div><p className="max-w-sm text-sm leading-relaxed text-ink-muted">Placeholder examples shown for layout only. They can be replaced with approved client feedback.</p></div><div className="grid gap-5 md:grid-cols-3">{testimonials.map(([image, name, role, quote], index) => <figure key={role} className={`${index === 1 ? "navy-surface text-background" : "bg-background"} rounded-xl border border-border p-6 shadow-sm`}><div className="flex items-center gap-1 text-brand-glow" aria-label="Example five star rating">★★★★★</div><blockquote className="mt-5 text-sm leading-relaxed">“{quote}”</blockquote><figcaption className="mt-6 flex items-center gap-3"><img src={image} alt="Placeholder client portrait" width={816} height={816} loading="lazy" className="size-11 rounded-full object-cover" /><div><p className="font-semibold">{name}</p><p className={`${index === 1 ? "text-navy-muted" : "text-ink-muted"} text-xs`}>{role}</p></div></figcaption></figure>)}</div></section>
 
-        <section id="faq" className="page-grid max-w-3xl py-16"><h2 className="display-font text-center text-3xl font-extrabold tracking-tight sm:text-4xl">Questions, answered</h2><div className="mt-8 space-y-3">{faqs.map(([question, answer]) => <details key={question} className="glass-panel group overflow-hidden rounded-2xl"><summary className="flex cursor-pointer list-none items-center justify-between p-5 font-semibold"><span>{question}</span><ChevronDown className="size-5 text-brand transition-transform group-open:rotate-180" /></summary><p className="px-5 pb-5 text-sm leading-relaxed text-ink-muted">{answer}</p></details>)}</div></section>
+        <section className="section-wash py-20 md:py-24"><div className="page-grid"><div className="mx-auto max-w-3xl rounded-xl border border-border bg-background p-7 shadow-sm sm:p-10"><div className="text-center"><span className="eyebrow">Project planning</span><h2 className="display-font mt-3 text-3xl font-extrabold tracking-tight">Planning a Project?</h2><p className="mx-auto mt-4 max-w-xl leading-relaxed text-ink-muted">Our projects start from $500. Tell us what you need and we’ll help determine the right solution for your business.</p></div><div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{budgetOptions.map((option) => <button key={option} type="button" onClick={() => setBudget(option)} className={`${budget === option ? "border-brand bg-brand-soft text-brand" : "border-border bg-background text-ink-muted hover:border-brand/60"} rounded-lg border-2 px-4 py-4 text-left text-sm font-semibold transition-colors`}><span className="block mb-1 text-xs font-normal">Estimated range</span>{option}</button>)}</div><div className="mt-7 flex flex-col items-center justify-between gap-4 rounded-lg bg-sky-wash p-5 text-center sm:flex-row sm:text-left"><div><p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand">Selected budget</p><p className="display-font mt-1 text-xl font-bold">{budget}</p></div><a href="#contact" className="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-background hover:bg-brand">Start a Conversation <ArrowUpRight className="size-4" /></a></div></div></div></section>
 
-        <section id="contact" className="page-grid py-16"><div className="grid gap-6 lg:grid-cols-2"><div className="brand-gradient rounded-3xl p-7 text-brand-foreground brand-shadow sm:p-10"><h2 className="display-font text-3xl font-extrabold tracking-tight">Let’s build your growth</h2><p className="mt-4 max-w-md leading-relaxed opacity-85">Tell us about your goals and we’ll send a free, no-pressure proposal within 48 hours.</p><ul className="mt-8 space-y-3 text-sm opacity-90"><li className="flex items-center gap-3"><Mail className="size-4" /> hello@rondigital.co</li><li className="flex items-center gap-3"><Sparkles className="size-4" /> Mon–Fri, 9am–6pm</li></ul></div><form onSubmit={handleSubmit} className="glass-panel rounded-3xl p-7 sm:p-8"><div className="grid gap-4 sm:grid-cols-2"><Field label="Name" name="name" placeholder="Jane Doe" required /><Field label="Email" name="email" type="email" placeholder="jane@company.com" required /></div><div className="mt-4 grid gap-4 sm:grid-cols-2"><Field label="Phone" name="phone" type="tel" placeholder="(555) 123-4567" /><label className="text-xs font-semibold uppercase tracking-wide text-ink-muted">Service interested in<select name="service" className="mt-1.5 w-full rounded-xl border border-input bg-background/60 px-4 py-3 text-sm font-normal normal-case tracking-normal text-foreground outline-none focus:ring-2 focus:ring-ring"><option>Choose a service</option><option>Website design</option><option>SEO & content</option><option>Paid media</option><option>Email & CRM</option><option>Full growth system</option></select></label></div><label className="mt-4 block text-xs font-semibold uppercase tracking-wide text-ink-muted">Message<textarea name="message" rows={3} placeholder="I’d like a new website and SEO..." className="mt-1.5 w-full resize-none rounded-xl border border-input bg-background/60 px-4 py-3 text-sm font-normal normal-case tracking-normal text-foreground outline-none placeholder:text-ink-muted/70 focus:ring-2 focus:ring-ring" required /></label><button type="submit" className="brand-gradient mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full py-3.5 font-semibold text-brand-foreground brand-shadow transition-transform hover:-translate-y-0.5">{submitted ? <>Request received <Check className="size-4" /></> : <>Send my request <ArrowUpRight className="size-4" /></>}</button>{submitted && <p role="status" className="mt-3 text-center text-sm font-medium text-brand">Thanks — we’ll be in touch within one business day.</p>}</form></div></section>
+        <section id="faq" className="page-grid max-w-3xl py-20 md:py-24"><div className="text-center"><span className="eyebrow">Questions, answered</span><h2 className="display-font mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Frequently Asked Questions</h2></div><div className="mt-10 space-y-3">{faqs.map(([question, answer]) => <details key={question} className="group rounded-xl border border-border bg-background"><summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold"><span>{question}</span><ChevronDown className="size-5 shrink-0 text-brand transition-transform group-open:rotate-180" /></summary><p className="px-5 pb-5 text-sm leading-relaxed text-ink-muted">{answer}</p></details>)}</div></section>
 
-        <section className="page-grid py-16"><div className="relative overflow-hidden rounded-3xl bg-ink p-8 text-center text-background sm:p-12"><div className="pointer-events-none absolute -right-16 -top-24 size-72 rounded-full bg-brand-glow/20 blur-3xl" /><h2 className="display-font relative text-3xl font-extrabold tracking-tight sm:text-5xl">Ready to grow with Ron Digital?</h2><p className="relative mx-auto mt-4 max-w-xl leading-relaxed text-background/70">Book a free 30-minute strategy call and leave with a clear action plan — whether you hire us or not.</p><a href="#contact" className="relative mt-8 inline-flex items-center gap-2 rounded-full bg-background px-8 py-3.5 font-bold text-brand transition-transform hover:-translate-y-0.5">Book your free call <ArrowUpRight className="size-4" /></a></div></section>
+        <section id="contact" className="navy-surface py-20 text-background md:py-24"><div className="page-grid grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start"><div><span className="eyebrow text-brand-glow">Start a conversation</span><h2 className="display-font mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">Let's Build Something That Works</h2><p className="mt-5 max-w-lg text-lg leading-relaxed text-navy-muted">Have a project, idea, or digital challenge? Tell us what you’re working on and let’s discuss how Ron Digital can help.</p><div className="mt-10 flex items-center gap-3 text-sm text-navy-muted"><span className="grid size-10 place-items-center rounded-lg bg-background/10 text-brand-glow"><Mail className="size-4" /></span><a href="mailto:rondigital.team@gmail.com" className="hover:text-brand-glow">rondigital.team@gmail.com</a></div><p className="mt-5 text-sm text-navy-muted">Prefer email? <a href="mailto:rondigital.team@gmail.com" className="text-brand-glow hover:underline">rondigital.team@gmail.com</a></p></div><form onSubmit={handleSubmit} className="rounded-xl border border-background/10 bg-background/[0.06] p-6 backdrop-blur-sm sm:p-8"><div className="grid gap-4 sm:grid-cols-2"><Field label="Full Name" name="name" placeholder="Your name" required dark /><Field label="Business Name" name="business" placeholder="Your business" dark /></div><div className="mt-4 grid gap-4 sm:grid-cols-2"><Field label="Email Address" name="email" type="email" placeholder="you@business.com" required dark /><Field label="Phone Number" name="phone" type="tel" placeholder="Optional" dark /></div><div className="mt-4 grid gap-4 sm:grid-cols-2"><SelectField label="Service Needed" name="service" options={services.map((service) => service.title).concat("Other")} dark /><SelectField label="Project Budget" name="budget" options={[...budgetOptions]} dark /></div><label className="mt-4 block text-xs font-semibold uppercase tracking-wide text-navy-muted">Message<textarea name="message" rows={4} placeholder="Tell us a little about what you’re working on..." required className="mt-1.5 w-full resize-none rounded-lg border border-background/15 bg-background/10 px-4 py-3 text-sm font-normal normal-case tracking-normal text-background outline-none placeholder:text-navy-muted focus:border-brand-glow focus:ring-2 focus:ring-brand-glow/30" /></label><button type="submit" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand py-3.5 font-semibold text-brand-foreground transition-colors hover:bg-brand-glow">{submitted ? <>Request received <Check className="size-4" /></> : <>Send Project Request <ArrowUpRight className="size-4" /></>}</button>{submitted && <p role="status" className="mt-3 text-center text-sm text-brand-glow">Thanks — we’ll be in touch soon.</p>}</form></div></section>
+
+        <section className="page-grid py-16"><div className="navy-surface rounded-xl p-8 text-background sm:p-12"><div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center"><div><span className="eyebrow text-brand-glow">The next step</span><h2 className="display-font mt-3 max-w-2xl text-3xl font-extrabold tracking-tight sm:text-4xl">Ready to Build a Better Digital Presence?</h2><p className="mt-4 max-w-xl leading-relaxed text-navy-muted">Let's create solutions that help you connect with your audience and move your business forward.</p></div><div className="flex shrink-0 flex-wrap gap-3"><a href="#contact" className="inline-flex items-center gap-2 rounded-lg bg-brand px-5 py-3.5 font-semibold text-brand-foreground hover:bg-brand-glow">Book a Consultation <ArrowUpRight className="size-4" /></a><a href="mailto:rondigital.team@gmail.com" className="inline-flex items-center gap-2 rounded-lg border border-background/20 px-5 py-3.5 font-semibold text-background hover:border-brand-glow hover:text-brand-glow">Contact Us <Mail className="size-4" /></a></div></div></div></section>
       </main>
 
-      <footer className="page-grid flex flex-col items-center justify-between gap-4 py-10 text-sm text-ink-muted md:flex-row"><div><img src={ronDigitalLogo} alt="Ron Digital" width={118} height={71} className="h-9 w-auto object-contain" /></div><p>© 2026 Ron Digital. All rights reserved.</p><div className="flex gap-5"><a href="#services" className="hover:text-brand">Services</a><a href="#faq" className="hover:text-brand">FAQ</a><a href="#contact" className="hover:text-brand">Contact</a><a href="#contact" aria-label="Contact Ron Digital on LinkedIn" className="hover:text-brand"><Linkedin className="size-4" /></a></div></footer>
+      <footer className="navy-surface border-t border-background/10 py-12 text-background"><div className="page-grid grid gap-10 lg:grid-cols-[1.2fr_1fr_1fr_0.8fr]"><div><div className="inline-flex rounded-md bg-background p-1"><img src={ronDigitalLogo} alt="Ron Digital" width={118} height={71} className="h-9 w-auto object-contain" /></div><p className="mt-5 max-w-xs text-sm leading-relaxed text-navy-muted">Practical digital solutions for businesses ready to build, connect, and grow.</p><p className="mt-4 text-sm italic text-brand-glow">Creating Solutions. Building Connections.</p></div><div><h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-glow">Quick links</h3><div className="mt-5 grid gap-3 text-sm text-navy-muted">{navigation.slice(0, 7).map(([label, href]) => <a key={href} href={href} className="hover:text-background">{label}</a>)}</div></div><div><h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-glow">Services</h3><div className="mt-5 grid gap-3 text-sm text-navy-muted">{services.slice(0, 5).map((service) => <a key={service.title} href="#services" className="hover:text-background">{service.title}</a>)}</div></div><div><h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-glow">Contact</h3><a href="mailto:rondigital.team@gmail.com" className="mt-5 block break-words text-sm text-navy-muted hover:text-background">rondigital.team@gmail.com</a><div className="mt-5 flex gap-3"><a href="#contact" aria-label="Ron Digital LinkedIn" className="grid size-9 place-items-center rounded-lg border border-background/15 text-navy-muted hover:border-brand-glow hover:text-brand-glow"><Linkedin className="size-4" /></a><a href="#contact" aria-label="Contact Ron Digital" className="grid size-9 place-items-center rounded-lg border border-background/15 text-navy-muted hover:border-brand-glow hover:text-brand-glow"><Mail className="size-4" /></a></div></div></div><div className="page-grid mt-10 border-t border-background/10 pt-6 text-xs text-navy-muted">© 2026 Ron Digital. All rights reserved.</div></footer>
     </div>
   );
 }
 
-function Field({ label, name, placeholder, type = "text", required = false }: { label: string; name: string; placeholder: string; type?: string; required?: boolean }) {
-  return <label className="block text-xs font-semibold uppercase tracking-wide text-ink-muted">{label}<input name={name} type={type} placeholder={placeholder} required={required} className="mt-1.5 w-full rounded-xl border border-input bg-background/60 px-4 py-3 text-sm font-normal normal-case tracking-normal text-foreground outline-none placeholder:text-ink-muted/70 focus:ring-2 focus:ring-ring" /></label>;
+function Field({ label, name, placeholder, type = "text", required = false, dark = false }: { label: string; name: string; placeholder: string; type?: string; required?: boolean; dark?: boolean }) {
+  return <label className={`${dark ? "text-navy-muted" : "text-ink-muted"} block text-xs font-semibold uppercase tracking-wide`}>{label}<input name={name} type={type} placeholder={placeholder} required={required} className={`${dark ? "border-background/15 bg-background/10 text-background placeholder:text-navy-muted focus:border-brand-glow focus:ring-brand-glow/30" : "border-input bg-background/60 text-foreground placeholder:text-ink-muted/70 focus:ring-ring"} mt-1.5 w-full rounded-lg border px-4 py-3 text-sm font-normal normal-case tracking-normal outline-none focus:ring-2`} /></label>;
+}
+
+function SelectField({ label, name, options, dark = false }: { label: string; name: string; options: string[]; dark?: boolean }) {
+  return <label className={`${dark ? "text-navy-muted" : "text-ink-muted"} block text-xs font-semibold uppercase tracking-wide`}>{label}<select name={name} className={`${dark ? "border-background/15 bg-background/10 text-background focus:border-brand-glow focus:ring-brand-glow/30" : "border-input bg-background/60 text-foreground focus:ring-ring"} mt-1.5 w-full rounded-lg border px-4 py-3 text-sm font-normal normal-case tracking-normal outline-none focus:ring-2`}>{options.map((option) => <option key={option} className="text-foreground">{option}</option>)}</select></label>;
 }
