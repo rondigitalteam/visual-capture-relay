@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { useState, type FormEvent } from "react";
 
+import ronLogoAsset from "@/assets/ron-digital-logo.png.asset.json";
 import davidPortrait from "@/assets/ron-client-david.jpg";
 import mayaPortrait from "@/assets/ron-client-maya.jpg";
 import sofiaPortrait from "@/assets/ron-client-sofia.jpg";
@@ -122,7 +123,7 @@ function Index() {
       <header className="sticky top-0 z-30 border-b border-border/70 bg-background/90 backdrop-blur-md">
         <div className="page-grid flex min-h-20 items-center justify-between gap-5">
           <a href="#top" aria-label="Ron Digital home" className="shrink-0 leading-none">
-            <span className="display-font text-2xl font-extrabold tracking-tight text-ink">Ron <span className="text-brand">Digital</span></span>
+            <img src={ronLogoAsset.url} alt="Ron Digital" className="h-14 w-auto md:h-16" />
           </a>
           <nav className="hidden items-center gap-5 text-sm text-ink-muted xl:flex" aria-label="Main navigation">
             {navigation.map(([label, href]) => <a key={href} href={href} className="transition-colors hover:text-brand">{label}</a>)}
