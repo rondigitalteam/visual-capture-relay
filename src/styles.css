@@ -177,6 +177,24 @@
   background: var(--ink);
 }
 
+@utility portfolio-night {
+  background: var(--ink);
+}
+
+@utility portfolio-stars {
+  background-image: radial-gradient(circle at 12% 18%, var(--brand-glow) 0 1px, transparent 2px), radial-gradient(circle at 82% 14%, var(--brand-glow) 0 1px, transparent 2px), radial-gradient(circle at 42% 52%, var(--brand-glow) 0 1px, transparent 2px), radial-gradient(circle at 68% 78%, var(--brand-glow) 0 1px, transparent 2px), radial-gradient(circle at 22% 88%, var(--brand-glow) 0 1px, transparent 2px);
+  background-size: 310px 260px, 420px 340px, 360px 300px, 470px 390px, 390px 320px;
+  background-position: 0 0, 80px 50px, 160px 110px, 30px 180px, 220px 30px;
+}
+
+@utility portfolio-frame-light {
+  background: linear-gradient(135deg, var(--brand-soft), var(--sky-wash));
+}
+
+@utility portfolio-frame-blue {
+  background: linear-gradient(135deg, var(--brand), var(--ink));
+}
+
 @utility section-wash {
   background: var(--sky-wash);
 }
