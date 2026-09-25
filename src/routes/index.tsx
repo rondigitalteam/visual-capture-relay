@@ -27,7 +27,21 @@ import davidPortrait from "@/assets/ron-client-david.jpg";
 import mayaPortrait from "@/assets/ron-client-maya.jpg";
 import sofiaPortrait from "@/assets/ron-client-sofia.jpg";
 
-type Filter = "All" | "Websites" | "Branding" | "Marketing" | "E-commerce";
+type Filter = "All" | "Store Growth" | "Email" | "Branding" | "Technical" | "Paid Ads" | "Social Media" | "SEO";
+
+type PortfolioProject = {
+  category: Exclude<Filter, "All">;
+  title: string;
+  client: string;
+  platform: string;
+  timeline: string;
+  challenge: string;
+  solution: string;
+  results: readonly { value: string; label: string; note: string }[];
+  services: readonly string[];
+  quote: string;
+  attribution: string;
+};
 
 const navigation = [
   ["Home", "#top"],
@@ -56,12 +70,136 @@ const features = [
   ["Results-Oriented", "Every solution is designed with visibility, engagement, and conversions in mind."],
 ] as const;
 
-const portfolioProjects = [
-  { name: "Northstar Commerce", category: "Websites" as Filter, type: "Website concept", description: "A clearer product journey for a growing online retailer." },
-  { name: "Signal Studio", category: "Branding" as Filter, type: "Brand system concept", description: "A focused visual system for a modern service business." },
-  { name: "Nurture Flow", category: "Marketing" as Filter, type: "Email system concept", description: "A welcome journey designed to turn interest into action." },
-  { name: "Atlas Checkout", category: "E-commerce" as Filter, type: "Conversion concept", description: "A simpler path from product discovery to purchase." },
+const portfolioProjects: PortfolioProject[] = [
+  {
+    category: "Store Growth",
+    title: "Complete Store Management",
+    client: "Cross Toss Trading",
+    platform: "Shopify",
+    timeline: "Ongoing",
+    challenge: "The client needed comprehensive store management to scale their e-commerce operations, increase traffic, and boost overall sales performance.",
+    solution: "Implemented full store management including product optimization, traffic strategies, conversion optimization, and ongoing analytics monitoring to maximize revenue.",
+    results: [
+      { value: "5,260", label: "Sessions", note: "+177% increase" },
+      { value: "$9,860", label: "Total Sales", note: "+55% growth" },
+      { value: "100+", label: "Orders", note: "+56% increase" },
+      { value: "1.81%", label: "Conversion Rate", note: "+80% improvement" },
+    ],
+    services: ["Store Management", "Traffic Optimization", "Sales Strategy", "Analytics"],
+    quote: "Our store performance was transformed. The results speak for themselves — sales nearly doubled!",
+    attribution: "Cross Toss Trading Team",
+  },
+  {
+    category: "Email",
+    title: "Email Marketing & Sales Growth",
+    client: "Autumn Bliss Market",
+    platform: "Shopify + Klaviyo",
+    timeline: "Ongoing",
+    challenge: "The health and beauty store needed a complete email marketing strategy to increase customer retention, recover abandoned carts, and drive consistent revenue from email campaigns.",
+    solution: "Implemented comprehensive Klaviyo email flows including abandoned cart recovery, browse abandonment, customer winback, a welcome series, strategic campaigns, Google Tag Manager, and a full store audit.",
+    results: [
+      { value: "1,809", label: "Sessions", note: "+276% increase" },
+      { value: "$1,835", label: "Total Sales", note: "+129% growth" },
+      { value: "34", label: "Orders", note: "+55% increase" },
+      { value: "100/100", label: "Store Audit", note: "SSL, mobile, content" },
+    ],
+    services: ["Klaviyo Email Flows", "Email Campaigns", "Google Tag Manager", "Store Audit", "Store Redesign"],
+    quote: "The email automation is incredible. We're recovering sales we would have lost and customers love the personalized experience.",
+    attribution: "Autumn Bliss Market Owner",
+  },
+  {
+    category: "Branding",
+    title: "German Pet Store Rebrand",
+    client: "Haustierbedarf4You",
+    platform: "Shopify",
+    timeline: "4 weeks",
+    challenge: "The German pet supply store needed a complete visual rebrand to better connect with pet owners and create a premium, trustworthy shopping experience.",
+    solution: "Completed a store redesign with modern branding, an engaging pet-focused experience, German localization, multilingual support, and an optimized user journey.",
+    results: [
+      { value: "100%", label: "Brand Identity", note: "Complete rebrand" },
+      { value: "Enhanced", label: "User Experience", note: "Modern design" },
+      { value: "Yes", label: "Mobile Ready", note: "Fully responsive" },
+      { value: "German", label: "Localization", note: "Native language support" },
+    ],
+    services: ["Store Rebrand", "Visual Design", "UX Optimization", "Localization"],
+    quote: "Die Besten Produkte für Pelzige Freunde — Our new store perfectly captures our brand mission!",
+    attribution: "Oliver Ormans, Owner",
+  },
+  {
+    category: "Technical",
+    title: "SSL Certificate Fix & Security",
+    client: "XIT Offroad",
+    platform: "E-commerce",
+    timeline: "1 week",
+    challenge: "The client's e-commerce store was showing SSL certificate errors, causing browser warnings that scared away customers and hurt SEO rankings.",
+    solution: "Completed SSL setup and verification, including certificate parsing, chain of trust, domain validation, cipher suite negotiation, and redirect configuration.",
+    results: [
+      { value: "Verified", label: "SSL Status", note: "Fully secured" },
+      { value: "SHA-256", label: "Certificate", note: "Industry standard" },
+      { value: "100%", label: "Browser Trust", note: "No warnings" },
+      { value: "Restored", label: "SEO Impact", note: "HTTPS ranking boost" },
+    ],
+    services: ["SSL Certificate Setup", "Security Configuration", "Domain Verification", "Technical Fixes"],
+    quote: "Our customers can now shop with confidence. No more security warnings — just smooth, secure checkout.",
+    attribution: "XIT Offroad Team",
+  },
+  {
+    category: "Paid Ads",
+    title: "Google Ads Campaign Management",
+    client: "Soma Dental",
+    platform: "Google Ads",
+    timeline: "Ongoing",
+    challenge: "The dental practice needed to increase patient bookings through targeted paid advertising while maintaining an efficient cost per acquisition.",
+    solution: "Implemented strategic Google Ads campaigns with optimized targeting, compelling ad copy, and conversion tracking to maximize ROI and drive quality leads.",
+    results: [
+      { value: "1,598", label: "Conversions", note: "New patient leads" },
+      { value: "21.68%", label: "Conversion Rate", note: "Above industry average" },
+      { value: "1,829", label: "Clicks", note: "Qualified traffic" },
+      { value: "$204.94", label: "Cost / Conversion", note: "Efficient CPA" },
+    ],
+    services: ["Google Ads Management", "Campaign Optimization", "Conversion Tracking", "Ad Copywriting"],
+    quote: "Our patient bookings have skyrocketed since launching these Google Ads campaigns.",
+    attribution: "Soma Dental Team",
+  },
+  {
+    category: "Social Media",
+    title: "Social Media Advertising",
+    client: "Tropix Beverages",
+    platform: "Facebook & Instagram Ads",
+    timeline: "3 months",
+    challenge: "The beverage brand needed to expand its reach and drive awareness across social platforms while maintaining cost efficiency.",
+    solution: "Developed a Facebook and Instagram advertising strategy with audience targeting, creative optimization, and multi-platform distribution.",
+    results: [
+      { value: "175K", label: "Reach", note: "People reached" },
+      { value: "144K", label: "Impressions", note: "Ad views" },
+      { value: "1,027", label: "Clicks", note: "Engaged users" },
+      { value: "$1.27", label: "Average CPC", note: "Cost efficient" },
+    ],
+    services: ["Facebook Ads", "Instagram Ads", "Audience Targeting", "Creative Strategy"],
+    quote: "The reach we achieved with our advertising budget exceeded all expectations. Great ROI!",
+    attribution: "Tropix Beverages Marketing Team",
+  },
+  {
+    category: "SEO",
+    title: "SEO Optimization",
+    client: "Urban Pet Club",
+    platform: "E-commerce",
+    timeline: "Ongoing",
+    challenge: "The pet supply store needed to improve organic search visibility and on-page SEO to drive more qualified traffic.",
+    solution: "Conducted a comprehensive SEO audit and implemented on-page improvements across metadata, page structure, server configuration, and content quality.",
+    results: [
+      { value: "78%", label: "On-Page Score", note: "SEO health" },
+      { value: "85%", label: "Meta Data", note: "Optimized" },
+      { value: "92%", label: "Page Structure", note: "Well organized" },
+      { value: "100%", label: "Server", note: "Fully optimized" },
+    ],
+    services: ["SEO Audit", "On-Page Optimization", "Meta Data", "Content Strategy"],
+    quote: "Our organic traffic has steadily increased since implementing the SEO recommendations.",
+    attribution: "Urban Pet Club Owner",
+  },
 ];
+
+const portfolioFilters: Filter[] = ["All", "Store Growth", "Email", "Branding", "Technical", "Paid Ads", "Social Media", "SEO"];
 
 const processSteps = [
   ["01", "Consultation", "We learn about your business, goals, and current challenges.", ClipboardList],
@@ -194,27 +332,49 @@ function Index() {
           <div className="portfolio-stars pointer-events-none absolute inset-0 opacity-70" />
           <div className="page-grid relative">
             <div className="mx-auto max-w-3xl text-center">
-              <span className="eyebrow text-brand-glow">Selected concepts</span>
-              <h2 className="display-font mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">A closer look at what we create</h2>
-              <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-navy-muted sm:text-lg">A curated look at sample digital experiences and brand systems. These are concept examples for layout only, not completed client work.</p>
+              <span className="eyebrow text-brand-glow">Client work</span>
+              <h2 className="display-font mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Results across every growth channel</h2>
+              <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-navy-muted sm:text-lg">Explore the challenges, solutions, and client-reported outcomes behind selected Ron Digital projects.</p>
             </div>
             <div className="mt-10 flex justify-center" role="group" aria-label="Filter project concepts">
-              <div className="flex flex-wrap justify-center gap-2 rounded-full border border-background/15 bg-background/[0.05] p-1.5 backdrop-blur-sm">
-                {(["All", "Websites", "Branding", "Marketing", "E-commerce"] as Filter[]).map((filter) => <button key={filter} type="button" onClick={() => setActiveFilter(filter)} className={`${activeFilter === filter ? "bg-brand text-brand-foreground" : "text-navy-muted hover:text-background"} rounded-full px-4 py-2 text-xs font-semibold transition-colors`}>{filter}</button>)}
+              <div className="flex max-w-4xl flex-wrap justify-center gap-2 rounded-xl border border-background/15 bg-background/[0.05] p-1.5 backdrop-blur-sm">
+                {portfolioFilters.map((filter) => <button key={filter} type="button" onClick={() => setActiveFilter(filter)} aria-pressed={activeFilter === filter} className={`${activeFilter === filter ? "bg-brand text-brand-foreground" : "text-navy-muted hover:text-background"} rounded-lg px-4 py-2 text-xs font-semibold transition-colors`}>{filter}</button>)}
               </div>
             </div>
-            <div className="mx-auto mt-14 grid max-w-5xl gap-7 md:grid-cols-2">
-              {visibleProjects.map((project, index) => <article key={project.name} className={`group ${index % 2 === 1 ? "md:mt-16" : ""}`}>
-                <div className={`${index % 2 === 0 ? "portfolio-frame-light" : "portfolio-frame-blue"} relative aspect-[1.3] overflow-hidden rounded-2xl border border-background/15 p-4 shadow-2xl transition-transform duration-300 group-hover:-translate-y-2`}>
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-xl border border-background/15 bg-ink/80">
-                    <div className="flex h-9 shrink-0 items-center justify-between border-b border-background/10 px-4"><div className="flex gap-1.5"><span className="size-2 rounded-full bg-brand-glow/70" /><span className="size-2 rounded-full bg-background/35" /><span className="size-2 rounded-full bg-background/20" /></div><span className="text-[10px] uppercase tracking-[0.18em] text-navy-muted">{project.category}</span></div>
-                    <div className="grid flex-1 grid-cols-[0.85fr_1.15fr] gap-5 p-6">
-                      <div className="flex flex-col justify-between"><div><div className="h-2 w-14 rounded-full bg-brand-glow" /><div className="mt-7 h-4 w-11/12 rounded bg-background/85" /><div className="mt-2 h-4 w-4/5 rounded bg-background/35" /><div className="mt-2 h-4 w-3/5 rounded bg-background/20" /></div><div className="h-8 w-24 rounded-md bg-brand/80" /></div>
-                      <div className="relative overflow-hidden rounded-lg border border-background/10 bg-background/[0.06] p-4"><div className="flex h-full items-end gap-2"><div className="h-2/5 flex-1 rounded-t bg-brand/30" /><div className="h-3/5 flex-1 rounded-t bg-brand/50" /><div className="h-4/5 flex-1 rounded-t bg-brand" /><div className="h-full flex-1 rounded-t bg-brand-glow" /></div><div className="absolute inset-x-4 top-5 h-px bg-background/10" /><div className="absolute inset-x-4 top-1/2 h-px bg-background/10" /></div>
-                    </div>
+            <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-relaxed text-navy-muted">Performance figures and quotations below are reproduced from the case-study information supplied by each project.</p>
+            <div className="mx-auto mt-12 grid max-w-6xl gap-6 lg:grid-cols-2">
+              {visibleProjects.map((project) => <article key={project.client} className="overflow-hidden rounded-xl border border-background/15 bg-background/[0.06] backdrop-blur-sm">
+                <div className="border-b border-background/10 p-6 sm:p-7">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <span className="rounded-md bg-brand/15 px-3 py-1.5 text-xs font-semibold text-brand-glow">{project.category}</span>
+                    <span className="text-xs font-medium text-navy-muted">{project.timeline}</span>
+                  </div>
+                  <h3 className="display-font mt-6 text-2xl font-bold">{project.client}</h3>
+                  <p className="mt-1 font-medium text-brand-glow">{project.title}</p>
+                  <p className="mt-2 text-sm text-navy-muted">{project.client} · {project.platform}</p>
+                  <div className="mt-6 grid grid-cols-2 gap-3">
+                    {project.results.map((result) => <div key={result.label} className="rounded-lg border border-background/10 bg-background/[0.05] p-4">
+                      <p className="display-font text-xl font-bold text-background sm:text-2xl">{result.value}</p>
+                      <p className="mt-1 text-xs font-semibold text-brand-glow">{result.label}</p>
+                      <p className="mt-1 text-xs text-navy-muted">{result.note}</p>
+                    </div>)}
                   </div>
                 </div>
-                <div className="mt-5 flex items-start justify-between gap-4"><div><span className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-glow">{project.type}</span><h3 className="display-font mt-2 text-2xl font-bold transition-colors group-hover:text-brand-glow">{project.name}</h3><p className="mt-2 max-w-sm text-sm leading-relaxed text-navy-muted">{project.description}</p></div><a href="#contact" aria-label={`Discuss ${project.name}`} className="grid size-11 shrink-0 place-items-center rounded-full border border-background/20 text-brand-glow transition-colors hover:bg-brand hover:text-brand-foreground"><ArrowUpRight className="size-4" /></a></div>
+                <details className="group">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-sm font-semibold sm:px-7">
+                    View full case study
+                    <ChevronDown className="size-5 shrink-0 text-brand-glow transition-transform group-open:rotate-180" />
+                  </summary>
+                  <div className="border-t border-background/10 px-6 pb-7 pt-6 sm:px-7">
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      <div><p className="text-xs font-semibold uppercase text-brand-glow">The challenge</p><p className="mt-2 text-sm leading-relaxed text-navy-muted">{project.challenge}</p></div>
+                      <div><p className="text-xs font-semibold uppercase text-brand-glow">Our solution</p><p className="mt-2 text-sm leading-relaxed text-navy-muted">{project.solution}</p></div>
+                    </div>
+                    <div className="mt-6"><p className="text-xs font-semibold uppercase text-brand-glow">Services applied</p><div className="mt-3 flex flex-wrap gap-2">{project.services.map((service) => <span key={service} className="rounded-md border border-background/15 px-3 py-1.5 text-xs text-navy-muted">{service}</span>)}</div></div>
+                    <blockquote className="mt-7 border-l-2 border-brand-glow pl-4 text-sm italic leading-relaxed text-background">“{project.quote}”<footer className="mt-2 text-xs not-italic text-navy-muted">— {project.attribution}</footer></blockquote>
+                    <a href="#contact" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-brand-glow hover:text-background">Start a similar project <ArrowUpRight className="size-4" /></a>
+                  </div>
+                </details>
               </article>)}
             </div>
             <div className="mx-auto mt-16 flex max-w-5xl flex-col items-center justify-between gap-5 border-t border-background/15 pt-8 text-center sm:flex-row sm:text-left"><div><h3 className="display-font text-xl font-bold">Have a project in mind?</h3><p className="mt-1 text-sm text-navy-muted">Let’s turn the next idea into something useful.</p></div><a href="#contact" className="inline-flex items-center gap-2 rounded-lg bg-brand px-5 py-3 text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand-glow">Let's Discuss Your Project <ArrowUpRight className="size-4" /></a></div>
